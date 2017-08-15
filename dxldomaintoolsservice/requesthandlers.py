@@ -1,5 +1,6 @@
 import logging
 
+from domaintools.exceptions import ServiceException
 from dxlclient.callbacks import RequestCallback
 from dxlclient.message import Response, ErrorResponse
 from dxlbootstrap.util import MessageUtils
@@ -35,7 +36,6 @@ class DomainToolsRequestCallback(RequestCallback):
             request.destination_topic, MessageUtils.decode_payload(request)))
 
         try:
-            # Create response
             res = Response(request)
 
             try:
@@ -44,24 +44,34 @@ class DomainToolsRequestCallback(RequestCallback):
                 request_dict = {}
 
             # Ensure required parameters are present
-            if request_dict and self._required_params:
+            if self._required_params:
                 for name in self._required_params:
                     if name not in request_dict:
                         raise Exception("Required parameter not found: '{0}'".format(name))
+
+            if "format" not in request_dict:
+                request_dict["format"] = "json"
 
             # Invoke DomainTools API via client
             dt_response = getattr(self._app.domaintools_api, self._func_name)(**request_dict)
 
             # Set response payload
-            MessageUtils.dict_to_json_payload(res, dt_response.data())
-
-            # Send response
-            self._app.client.send_response(res)
+            response_data = dt_response.data()
+            if type(response_data) is dict:
+                MessageUtils.dict_to_json_payload(res, response_data)
+            else:
+                MessageUtils.encode_payload(res, response_data)
+        except ServiceException as ex:
+            logger.exception("Error handling request")
+            msg = "%s: %s" % (ex.__class__.__name__, ex.reason)
+            res = ErrorResponse(request, MessageUtils.encode(msg))
 
         except Exception as ex:
             logger.exception("Error handling request")
             msg = str(ex)
             if len(msg) == 0:
                 msg = ex.__class__.__name__
-            err_res = ErrorResponse(request, MessageUtils.encode(msg))
-            self._app.client.send_response(err_res)
+            res = ErrorResponse(request, MessageUtils.encode(msg))
+
+        # Send response
+        self._app.client.send_response(res)
