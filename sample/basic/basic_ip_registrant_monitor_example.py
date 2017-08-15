@@ -1,10 +1,14 @@
+# This sample invokes and displays the results of a DomainTools "IP Registrant Monitor" via DXL.
+#
+# https://www.domaintools.com/resources/api-documentation/ip-registrant-monitor/
+
 import os
 import sys
 
-from dxlclient.client_config import DxlClientConfig
-from dxlclient.client import DxlClient
-from dxlclient.message import Message, Event, Request
 from dxlbootstrap.util import MessageUtils
+from dxlclient.client import DxlClient
+from dxlclient.client_config import DxlClientConfig
+from dxlclient.message import Message, Request
 
 # Import common logging and configuration
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/..")
@@ -26,7 +30,7 @@ with DxlClient(config) as client:
 
     request_topic = "/opendxl-domaintools/service/domaintools/ip_registrant_monitor"
     req = Request(request_topic)
-    MessageUtils.dict_to_json_payload(req, {"query": "google"})
+    MessageUtils.dict_to_json_payload(req, {"query": "domaintools"})
     res = client.sync_request(req, timeout=30)
     if res.message_type != Message.MESSAGE_TYPE_ERROR:
         res_dict = MessageUtils.json_payload_to_dict(res)

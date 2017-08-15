@@ -1,10 +1,14 @@
+# This sample invokes and displays the results of a DomainTools "Reverse IP" via DXL.
+#
+# https://www.domaintools.com/resources/api-documentation/reverse-ip/
+
 import os
 import sys
 
-from dxlclient.client_config import DxlClientConfig
-from dxlclient.client import DxlClient
-from dxlclient.message import Message, Event, Request
 from dxlbootstrap.util import MessageUtils
+from dxlclient.client import DxlClient
+from dxlclient.client_config import DxlClientConfig
+from dxlclient.message import Message, Request
 
 # Import common logging and configuration
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/..")
