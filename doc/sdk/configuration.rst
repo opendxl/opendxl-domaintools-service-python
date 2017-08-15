@@ -53,16 +53,23 @@ DomainTools DXL Python Service (dxldomaintoolsservice.config)
 
         .. code-block:: python
 
-            TODO: Provide configuration file example
+            [General]
+            # The DomainTools API User (required)
+            apiUser=-- YOUR API USER --
 
-    **TODO: Provide section name**
+            # The DomainTools API Key (required)
+            apiKey=-- YOUR API KEY --
 
-        The ``TODO: Provide section name`` section is used to specify...
+    **General**
+
+        The ``General``  section is used to specify the DomainTools API User and API Key ...
 
         +------------------------+----------+--------------------------------------------------------------------+
         | Name                   | Required | Description                                                        |
         +========================+==========+====================================================================+
-        | TODO: Provide property | yes      | TODO: Provide property description                                 |
+        | apiUser                | yes      | The DomainTools API username for authenticating with DomainTools   |
+        +------------------------+----------+--------------------------------------------------------------------+
+        | apiKey                 | yes      | The DomainTools API key for authenticating with DomainTools        |
         +------------------------+----------+--------------------------------------------------------------------+
 
 Logging File (logging.config)
