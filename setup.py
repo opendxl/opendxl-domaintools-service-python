@@ -6,14 +6,12 @@ import setuptools.command.sdist
 # Patch setuptools' sdist behaviour with distutils' sdist behaviour
 setuptools.command.sdist.sdist.run = distutils.command.sdist.sdist.run
 
-VERSION = __import__('dxldomaintoolsservice').get_version()
-
 dist = setup(
     # Package name:
     name="dxldomaintoolsservice",
 
     # Version number:
-    version=VERSION,
+    version="0.1.0",
 
     # Requirements
     install_requires=[
