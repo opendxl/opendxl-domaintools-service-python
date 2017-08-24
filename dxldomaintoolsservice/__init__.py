@@ -1,10 +1,7 @@
 from __future__ import absolute_import
 
+from ._version import __version__
 from .app import DomainToolsService
-
-import pkg_resources
-
-__version__ = pkg_resources.require("dxldomaintoolsservice")[0].version
 
 def get_version():
     """
