@@ -46,11 +46,15 @@ class DomainToolsRequestCallback(RequestCallback):
             if self._required_params:
                 for name in self._required_params:
                     if name not in request_dict:
-                        raise Exception("Required parameter not found: '{0}'".
+                        raise Exception("Required parameter not found: '{}'".
                                         format(name))
 
             if "format" not in request_dict:
                 request_dict["format"] = "json"
+            elif request_dict["format"] not in ("json", "xml"):
+                raise Exception("Unsupported format requested: '{}'. {}".format(
+                    request_dict["format"],
+                    "Only 'json' and 'xml' are supported."))
 
             # Invoke DomainTools API via client
             dt_response = \
