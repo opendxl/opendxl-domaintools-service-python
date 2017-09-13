@@ -1,8 +1,9 @@
+from collections import OrderedDict
 import logging
 
 from dxlbootstrap.app import Application
 from dxlclient.service import ServiceRegistrationInfo
-from requesthandlers import DomainToolsRequestCallback
+from dxldomaintoolsservice.requesthandlers import DomainToolsRequestCallback
 from domaintools import API
 
 
@@ -18,7 +19,8 @@ class DomainToolsService(Application):
     #: The DXL service type for the DomainTools API
     SERVICE_TYPE = "/opendxl-domaintools/service/domaintools"
 
-    #: The name of the "General" section within the application configuration file
+    #: The name of the "General" section within the application configuration
+    #: file
     GENERAL_CONFIG_SECTION = "General"
     #: The property used to specify the DomainTools API Key in the application
     #: configuration file
@@ -34,8 +36,12 @@ class DomainToolsService(Application):
         :param config_dir: The location of the configuration files for the
             application
         """
-        super(DomainToolsService, self).__init__(config_dir, "dxldomaintoolsservice.config")
+        super(DomainToolsService, self).__init__(
+            config_dir,
+            "dxldomaintoolsservice.config")
         self._api = None
+        self._api_key = None
+        self._api_user = None
 
     @property
     def domaintools_api(self):
@@ -57,7 +63,8 @@ class DomainToolsService(Application):
     @property
     def config(self):
         """
-        The application configuration (as read from the "dxldomaintoolsservice.config" file)
+        The application configuration (as read from the
+        "dxldomaintoolsservice.config" file)
         """
         return self._config
 
@@ -80,23 +87,27 @@ class DomainToolsService(Application):
 
         # API Key
         try:
-            api_key = config.get(self.GENERAL_CONFIG_SECTION, self.GENERAL_API_KEY_CONFIG_PROP)
+            self._api_key = config.get(self.GENERAL_CONFIG_SECTION,
+                                       self.GENERAL_API_KEY_CONFIG_PROP)
         except Exception:
             pass
-        if not api_key:
-            raise Exception("DomainTools API Key not found in configuration file: {0}"
-                            .format(self._app_config_path))
+        if not self._api_key:
+            raise Exception(
+                "DomainTools API Key not found in configuration file: {0}"
+                .format(self._app_config_path))
 
         # API User
         try:
-            api_user = config.get(self.GENERAL_CONFIG_SECTION, self.GENERAL_API_USER_CONFIG_PROP)
+            self._api_user = config.get(self.GENERAL_CONFIG_SECTION,
+                                        self.GENERAL_API_USER_CONFIG_PROP)
         except Exception:
             pass
-        if not api_user:
-            raise Exception("DomainTools API User not found in configuration file: {0}"
-                            .format(self._app_config_path))
+        if not self._api_user:
+            raise Exception(
+                "DomainTools API User not found in configuration file: {0}"
+                .format(self._app_config_path))
 
-        self._api = API(api_user, api_key)
+        self._api = API(self._api_user, self._api_key)
 
     def on_dxl_connect(self):
         """
@@ -104,81 +115,59 @@ class DomainToolsService(Application):
         to the DXL fabric.
         """
         logger.info("On 'DXL connect' callback.")
-    
+
     def on_register_services(self):
         """
         Invoked when services should be registered with the application
         """
-        # For methods where "query" is the only required parameter (the majority)
-        QUERY_PARAM = ["query"]
+        # For methods where "query" is the only required parameter (the
+        # majority)
+        query_param = ["query"]
+
+        # List of callbacks to register. Each item's key is the name of the
+        # service to register. The associated value for each item is a list
+        # of parameters which are required when invoking the service.
+        callbacks = OrderedDict((
+            ("account_information", None),
+            ("brand_monitor", query_param),
+            ("domain_profile", query_param),
+            ("domain_search", query_param),
+            ("domain_suggestions", query_param),
+            ("host_domains", ["ip"]),
+            ("hosting_history", query_param),
+            ("ip_monitor", query_param),
+            ("ip_registrant_monitor", query_param),
+            ("iris", None),
+            ("name_server_monitor", query_param),
+            ("parsed_whois", query_param),
+            ("phisheye", query_param),
+            ("phisheye_term_list", None),
+            ("registrant_monitor", query_param),
+            ("reputation", query_param),
+            ("reverse_ip", ["domain"]),
+            ("reverse_ip_whois", None),
+            ("reverse_name_server", query_param),
+            ("reverse_whois", query_param),
+            ("whois", query_param),
+            ("whois_history", query_param)))
 
         # Register service 'domaintools_service'
-        logger.info("Registering service: {0}".format("domaintools_service"))
-        service = ServiceRegistrationInfo(self._dxl_client, "/opendxl-domaintools/service/domaintools")
-        logger.info("Registering request callback: {0}".format("domaintools_account_information_requesthandler"))
-        self.add_request_callback(service, "{0}/account_information".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "account_information"), False)
-        logger.info("Registering request callback: {0}".format("domaintools_brand_monitor_requesthandler"))
-        self.add_request_callback(service, "{0}/brand_monitor".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "brand_monitor", QUERY_PARAM), False)
-        logger.info("Registering request callback: {0}".format("domaintools_domain_profile_requesthandler"))
-        self.add_request_callback(service, "{0}/domain_profile".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "domain_profile", QUERY_PARAM), False)
-        logger.info("Registering request callback: {0}".format("domaintools_domain_search_requesthandler"))
-        self.add_request_callback(service, "{0}/domain_search".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "domain_search", QUERY_PARAM), False)
-        logger.info("Registering request callback: {0}".format("domaintools_domain_suggestions_requesthandler"))
-        self.add_request_callback(service, "{0}/domain_suggestions".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "domain_suggestions", QUERY_PARAM), False)
-        logger.info("Registering request callback: {0}".format("domaintools_hosting_history_requesthandler"))
-        self.add_request_callback(service, "{0}/hosting_history".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "hosting_history", QUERY_PARAM), False)
-        logger.info("Registering request callback: {0}".format("domaintools_ip_monitor_requesthandler"))
-        self.add_request_callback(service, "{0}/ip_monitor".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "ip_monitor", QUERY_PARAM), False)
-        logger.info("Registering request callback: {0}".format("domaintools_ip_registrant_monitor_requesthandler"))
-        self.add_request_callback(service, "{0}/ip_registrant_monitor".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "ip_registrant_monitor", QUERY_PARAM), False)
-        logger.info("Registering request callback: {0}".format("domaintools_name_server_monitor_requesthandler"))
-        self.add_request_callback(service, "{0}/name_server_monitor".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "name_server_monitor", QUERY_PARAM), False)
-        logger.info("Registering request callback: {0}".format("domaintools_parsed_whois_requesthandler"))
-        self.add_request_callback(service, "{0}/parsed_whois".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "parsed_whois", QUERY_PARAM), False)
-        logger.info("Registering request callback: {0}".format("domaintools_registrant_monitor_requesthandler"))
-        self.add_request_callback(service, "{0}/registrant_monitor".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "registrant_monitor", QUERY_PARAM), False)
-        logger.info("Registering request callback: {0}".format("domaintools_reputation_requesthandler"))
-        self.add_request_callback(service, "{0}/reputation".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "reputation", QUERY_PARAM), False)
-        logger.info("Registering request callback: {0}".format("domaintools_reverse_ip_requesthandler"))
-        self.add_request_callback(service, "{0}/reverse_ip".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "reverse_ip", ["domain"]), False)
-        logger.info("Registering request callback: {0}".format("domaintools_host_domains_requesthandler"))
-        self.add_request_callback(service, "{0}/host_domains".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "host_domains", ["ip"]), False)
-        logger.info("Registering request callback: {0}".format("domaintools_reverse_ip_whois_requesthandler"))
-        self.add_request_callback(service, "{0}/reverse_ip_whois".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "reverse_ip_whois"), False)
-        logger.info("Registering request callback: {0}".format("domaintools_reverse_name_server_requesthandler"))
-        self.add_request_callback(service, "{0}/reverse_name_server".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "reverse_name_server", QUERY_PARAM), False)
-        logger.info("Registering request callback: {0}".format("domaintools_reverse_whois_requesthandler"))
-        self.add_request_callback(service, "{0}/reverse_whois".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "reverse_whois", QUERY_PARAM), False)
-        logger.info("Registering request callback: {0}".format("domaintools_whois_requesthandler"))
-        self.add_request_callback(service, "{0}/whois".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "whois", QUERY_PARAM), False)
-        logger.info("Registering request callback: {0}".format("domaintools_whois_history_requesthandler"))
-        self.add_request_callback(service, "{0}/whois_history".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "whois_history", QUERY_PARAM), False)
-        logger.info("Registering request callback: {0}".format("domaintools_phisheye_requesthandler"))
-        self.add_request_callback(service, "{0}/phisheye".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "phisheye", QUERY_PARAM), False)
-        logger.info("Registering request callback: {0}".format("domaintools_phisheye_term_list_requesthandler"))
-        self.add_request_callback(service, "{0}/phisheye_term_list".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "phisheye_term_list"), False)
-        logger.info("Registering request callback: {0}".format("domaintools_iris_requesthandler"))
-        self.add_request_callback(service, "{0}/iris".format(self.SERVICE_TYPE),
-                                  DomainToolsRequestCallback(self, "iris"), False)
+        logger.info("Registering service: domaintools_service")
+        service = ServiceRegistrationInfo(
+            self._dxl_client,
+            "/opendxl-domaintools/service/domaintools")
+
+        for service_name, required_params in callbacks.items():
+            logger.info(
+                "Registering request callback: domaintools_%s_requesthandler",
+                service_name)
+            self.add_request_callback(service,
+                                      "{}/{}".format(self.SERVICE_TYPE,
+                                                     service_name),
+                                      DomainToolsRequestCallback(
+                                          self,
+                                          service_name,
+                                          required_params),
+                                      False)
+
         self.register_service(service)

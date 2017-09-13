@@ -1,6 +1,8 @@
-# This sample invokes and displays the results of a DomainTools "Account Information" via DXL.
+# This sample invokes and displays the results of a DomainTools "Account
+# Information" via DXL.
 #
-# See: https://www.domaintools.com/resources/api-documentation/account-information/
+# See:
+# https://www.domaintools.com/resources/api-documentation/account-information/
 
 import os
 import sys
@@ -28,12 +30,13 @@ with DxlClient(config) as client:
 
     logger.info("Connected to DXL fabric.")
 
-    request_topic = "/opendxl-domaintools/service/domaintools/account_information"
+    request_topic = \
+        "/opendxl-domaintools/service/domaintools/account_information"
     req = Request(request_topic)
     res = client.sync_request(req, timeout=30)
     if res.message_type != Message.MESSAGE_TYPE_ERROR:
         res_dict = MessageUtils.json_payload_to_dict(res)
-        print MessageUtils.dict_to_json(res_dict, pretty_print=True)
+        print(MessageUtils.dict_to_json(res_dict, pretty_print=True))
     else:
-        print "Error invoking service with topic '{0}': {1} ({2})".format(
-            request_topic, res.error_message, res.error_code)
+        print("Error invoking service with topic '{}': {} ({})".format(
+            request_topic, res.error_message, res.error_code))

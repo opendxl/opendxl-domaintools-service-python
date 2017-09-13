@@ -35,13 +35,14 @@ def signal_handler(signum, frame):
         else:
             exit(1)
 
+
 # Signals to register for
 signal.signal(signal.SIGTERM, signal_handler)
 signal.signal(signal.SIGINT, signal_handler)
 
 # Validate command line
 if len(sys.argv) != 2:
-    print "Usage: dxldomaintoolsservice <configuration files directory>"
+    print("Usage: dxldomaintoolsservice <configuration files directory>")
     sys.exit(1)
 
 #
@@ -56,7 +57,8 @@ if os.access(logging_config_path, os.R_OK):
     logger = logging.getLogger()
 else:
     # Default log configuration (no configuration file)
-    log_formatter = logging.Formatter('%(asctime)s %(name)-12s %(levelname)-8s %(message)s')
+    log_formatter = logging.Formatter(
+        '%(asctime)s %(name)-12s %(levelname)-8s %(message)s')
 
     console_handler = logging.StreamHandler()
     console_handler.setFormatter(log_formatter)
@@ -81,3 +83,4 @@ with DomainToolsService(sys.argv[1]) as app:
         pass
     except:
         logger.exception("Error occurred, exiting")
+        sys.exit(1)

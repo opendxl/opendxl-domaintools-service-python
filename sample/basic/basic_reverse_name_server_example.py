@@ -1,4 +1,5 @@
-# This sample invokes and displays the results of a DomainTools "Reverse Name Server" via DXL.
+# This sample invokes and displays the results of a DomainTools "Reverse Name
+# Server" via DXL.
 #
 # https://www.domaintools.com/resources/api-documentation/reverse-name-server/
 
@@ -28,13 +29,14 @@ with DxlClient(config) as client:
 
     logger.info("Connected to DXL fabric.")
 
-    request_topic = "/opendxl-domaintools/service/domaintools/reverse_name_server"
+    request_topic = \
+        "/opendxl-domaintools/service/domaintools/reverse_name_server"
     req = Request(request_topic)
     MessageUtils.dict_to_json_payload(req, {"query": "domaintools.net"})
     res = client.sync_request(req, timeout=30)
     if res.message_type != Message.MESSAGE_TYPE_ERROR:
         res_dict = MessageUtils.json_payload_to_dict(res)
-        print MessageUtils.dict_to_json(res_dict, pretty_print=True)
+        print(MessageUtils.dict_to_json(res_dict, pretty_print=True))
     else:
-        print "Error invoking service with topic '{0}': {1} ({2})".format(
-            request_topic, res.error_message, res.error_code)
+        print("Error invoking service with topic '{}': {} ({})".format(
+            request_topic, res.error_message, res.error_code))
