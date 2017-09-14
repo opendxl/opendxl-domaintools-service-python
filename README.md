@@ -4,8 +4,8 @@
 
 ## Overview
 
-The DomainTools DXL Python service exposes access to the `DomainTools API <https://www.domaintools.com/resources/api-documentation/>`_
-via the `Data Exchange Layer <http://www.mcafee.com/us/solutions/data-exchange-layer.aspx>`_ (DXL) fabric.
+The DomainTools DXL Python service exposes access to the [DomainTools API](https://www.domaintools.com/resources/api-documentation/)
+via the [Data Exchange Layer](http://www.mcafee.com/us/solutions/data-exchange-layer.aspx) (DXL) fabric.
 
 ## Documentation
 
@@ -34,7 +34,6 @@ See the [Docker Support Documentation](https://opendxl.github.io/opendxl-domaint
 ## Bugs and Feedback
 
 For bugs, questions and discussions please use the [GitHub Issues](https://github.com/opendxl/opendxl-domaintools-service-python/issues).
-
 
 ## LICENSE
 
