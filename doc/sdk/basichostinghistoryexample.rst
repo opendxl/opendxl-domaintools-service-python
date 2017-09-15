@@ -141,11 +141,9 @@ to report on.
 
 From the DomainTools `Hosting History Documentation <https://www.domaintools.com/resources/api-documentation/hosting-history/>`_:
 
-`"
-The Hosting History API provides a list of changes that have occurred in a Domain Name's registrar, IP address, and
-name servers. IP and name server events include	the value before and after the change and indicate the type of action
-that triggered the event.
-"`
+    `"The Hosting History API provides a list of changes that have occurred in a Domain Name's registrar, IP address, and
+    name servers. IP and name server events include	the value before and after the change and indicate the type of action
+    that triggered the event."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

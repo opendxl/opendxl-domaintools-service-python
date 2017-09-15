@@ -146,10 +146,8 @@ This does not require any payload and returns account information based on the A
 
 From the DomainTools `Account Information Documentation <https://www.domaintools.com/resources/api-documentation/account-information/>`_:
 
-`"
-The Account Information API provides a quick and easy way to get a snapshot of API product usage for an account.
-Usage is broken down by day and by month.
-"`
+    `"The Account Information API provides a quick and easy way to get a snapshot of API product usage for an account.
+    Usage is broken down by day and by month."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

@@ -104,12 +104,10 @@ to report on.
 
 From the DomainTools `Iris Pivot API Documentation <https://www.domaintools.com/resources/api-documentation/iris/>`_:
 
-`"
-The Iris Pivot API enables bulk enrichment of a list of domains with parsed domain and infrastructure profiles
-sourced from the Iris database. It also provides a multivariate search across several of the most commonly-used
-Iris data fields. Queries to the Iris Pivot API deduct from the same Iris query allocation assigned to a user's
-Enterprise Membership for qualified Iris customers.
-"`
+    `"The Iris Pivot API enables bulk enrichment of a list of domains with parsed domain and infrastructure profiles
+    sourced from the Iris database. It also provides a multivariate search across several of the most commonly-used
+    Iris data fields. Queries to the Iris Pivot API deduct from the same Iris query allocation assigned to a user's
+    Enterprise Membership for qualified Iris customers."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

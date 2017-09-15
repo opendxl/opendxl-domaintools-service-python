@@ -62,7 +62,7 @@ DomainTools DXL Python Service (dxldomaintoolsservice.config)
 
     **General**
 
-        The ``General``  section is used to specify the DomainTools API User and API Key ...
+        The ``General``  section is used to specify the DomainTools API User and API Key:
 
         +------------------------+----------+--------------------------------------------------------------------+
         | Name                   | Required | Description                                                        |

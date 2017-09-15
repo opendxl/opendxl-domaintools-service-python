@@ -176,11 +176,9 @@ to report on.
 
 From the DomainTools `Parsed Whois Documentation <https://www.domaintools.com/resources/api-documentation/parsed-whois/>`_:
 
-`"
-The Parsed Whois API provides parsed information extracted from the raw Whois record. The API is optimized to quickly
-retrieve the Whois record, group important data together and return a well-structured format. The Parsed Whois API is
-ideal for anyone wishing to search for, index, or cross-reference data from one or multiple Whois records.
-"`
+    `"The Parsed Whois API provides parsed information extracted from the raw Whois record. The API is optimized to quickly
+    retrieve the Whois record, group important data together and return a well-structured format. The Parsed Whois API is
+    ideal for anyone wishing to search for, index, or cross-reference data from one or multiple Whois records."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

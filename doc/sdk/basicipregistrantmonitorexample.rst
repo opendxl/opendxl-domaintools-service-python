@@ -118,11 +118,9 @@ to report on.
 
 From the DomainTools `IP Registrant Monitor API Documentation <https://www.domaintools.com/resources/api-documentation/ip-registrant-monitor/>`_:
 
-`"
-The IP Registrant Monitor API searches the ownership (Whois) records of domain names for specific search terms.
-The product is ideal for monitoring specific domain owners (such as "DomainTools LLC") to be alerted whenever their information
-appears in a newly-registered domain name. The API will also alert you to domains that no longer match a specific term.
-"`
+    `"The IP Registrant Monitor API searches the ownership (Whois) records of domain names for specific search terms.
+    The product is ideal for monitoring specific domain owners (such as "DomainTools LLC") to be alerted whenever their information
+    appears in a newly-registered domain name. The API will also alert you to domains that no longer match a specific term."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

@@ -71,11 +71,9 @@ to report on.
 
 From the DomainTools `Registrant Monitor Documentation <https://www.domaintools.com/resources/api-documentation/registrant-monitor/>`_:
 
-`"
-The Registrant Monitor API searches the ownership (Whois) records of domain names for specific search terms.
-The product is ideal for monitoring specific domain owners (such as "DomainTools LLC") to be alerted whenever their
-information appears in a newly-registered domain name.
-"`
+    `"The Registrant Monitor API searches the ownership (Whois) records of domain names for specific search terms.
+    The product is ideal for monitoring specific domain owners (such as "DomainTools LLC") to be alerted whenever their
+    information appears in a newly-registered domain name."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

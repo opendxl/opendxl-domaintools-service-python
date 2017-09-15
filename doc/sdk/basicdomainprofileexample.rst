@@ -137,11 +137,9 @@ to report on.
 
 From the DomainTools `Domain Profile Documentation <https://www.domaintools.com/resources/api-documentation/domain-profile/>`_:
 
-`"
-The Domain Profile API provides basic domain name registration details and a preview of additional data available from DomainTools
-membership and report products. The preview data is especially useful for DomainTools affiliates who want to show useful information
-on a domain name or a registrant in their affiliate link.
-"`
+    `"The Domain Profile API provides basic domain name registration details and a preview of additional data available from DomainTools
+    membership and report products. The preview data is especially useful for DomainTools affiliates who want to show useful information
+    on a domain name or a registrant in their affiliate link."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

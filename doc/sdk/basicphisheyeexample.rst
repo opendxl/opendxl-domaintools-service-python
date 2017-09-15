@@ -112,10 +112,8 @@ to report on.
 
 From the DomainTools `PhishEye Documentation <https://www.domaintools.com/resources/api-documentation/phisheye/>`_:
 
-`"
-The PhishEye API provides programmatic access to daily monitor results from the DomainTools PhishEye product.
-The PhishEye API is only available via our Enterprise Solutions team, and is not included in a membership.
-"`
+    `"The PhishEye API provides programmatic access to daily monitor results from the DomainTools PhishEye product.
+    The PhishEye API is only available via our Enterprise Solutions team, and is not included in a membership."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

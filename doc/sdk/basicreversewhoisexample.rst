@@ -74,9 +74,7 @@ to report on.
 
 From the DomainTools `Reverse Whois Documentation <https://www.domaintools.com/resources/api-documentation/reverse-whois/>`_:
 
-`"
-The Reverse Whois API provides a list of domain names that share the same Registrant Information.
-"`
+    `"The Reverse Whois API provides a list of domain names that share the same Registrant Information."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

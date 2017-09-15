@@ -71,14 +71,14 @@ class DomainToolsRequestCallback(RequestCallback):
         except ServiceException as ex:
             logger.exception("Error handling request")
             msg = "%s: %s" % (ex.__class__.__name__, ex.reason)
-            res = ErrorResponse(request, MessageUtils.encode(msg))
+            res = ErrorResponse(request, error_message=MessageUtils.encode(msg))
 
         except Exception as ex:
             logger.exception("Error handling request")
             msg = str(ex)
             if not msg:
                 msg = ex.__class__.__name__
-            res = ErrorResponse(request, MessageUtils.encode(msg))
+            res = ErrorResponse(request, error_message=MessageUtils.encode(msg))
 
         # Send response
         self._app.client.send_response(res)

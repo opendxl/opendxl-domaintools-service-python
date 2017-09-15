@@ -68,10 +68,8 @@ to report on.
 
 From the DomainTools `Reputation Documentation <https://www.domaintools.com/resources/api-documentation/reputation/>`_:
 
-`"
-Provides a risk score for the domain.
-The Reputation API is only available via our Enterprise Solutions team, and is not included in a membership.
-"`
+    `"Provides a risk score for the domain.
+    The Reputation API is only available via our Enterprise Solutions team, and is not included in a membership."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

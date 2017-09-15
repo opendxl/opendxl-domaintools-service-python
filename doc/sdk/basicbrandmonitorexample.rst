@@ -73,11 +73,9 @@ to report on.
 
 From the DomainTools `Brand Monitor Documentation <https://www.domaintools.com/resources/api-documentation/brand-monitor/>`_:
 
-`"
-The Brand Monitor API will search across all new domain registrations worldwide, and return result sets consisting of domain names
-that contain a customer's brand or monitored word/string. The Brand Monitor API looks at country code TLDS and new generic TLDs,
-as well as the usual suspects of .COM, .NET,.ORG, etc.
-"`
+    `"The Brand Monitor API will search across all new domain registrations worldwide, and return result sets consisting of domain names
+    that contain a customer's brand or monitored word/string. The Brand Monitor API looks at country code TLDS and new generic TLDs,
+    as well as the usual suspects of .COM, .NET,.ORG, etc."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

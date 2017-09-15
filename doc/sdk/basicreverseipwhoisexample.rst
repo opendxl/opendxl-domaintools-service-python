@@ -93,10 +93,8 @@ to report on.
 
 From the DomainTools `Reverse IP Whois Documentation <https://www.domaintools.com/resources/api-documentation/reverse-ip-whois/>`_:
 
-`"
-The Reverse IP Whois API provides a list of IP ranges that are owned by an Organization. You can enter an organization’s
-name and receive a list of all of the organization’s currently owned IP ranges.
-"`
+    `"The Reverse IP Whois API provides a list of IP ranges that are owned by an Organization. You can enter an organization’s
+    name and receive a list of all of the organization’s currently owned IP ranges."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

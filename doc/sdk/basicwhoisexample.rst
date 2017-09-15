@@ -88,9 +88,7 @@ to report on.
 
 From the DomainTools `Whois Lookup Documentation <https://www.domaintools.com/resources/api-documentation/whois-lookup/>`_:
 
-`"
-The Whois Lookup API provides the ownership record for a domain name or IP address with basic registration details.
-"`
+    `"The Whois Lookup API provides the ownership record for a domain name or IP address with basic registration details."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

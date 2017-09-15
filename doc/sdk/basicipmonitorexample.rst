@@ -73,10 +73,8 @@ to report on.
 
 From the DomainTools `IP Monitor Documentation <https://www.domaintools.com/resources/api-documentation/ip-monitor/>`_:
 
-`"
-The IP Monitor API searches the daily activity of all our monitored TLDs on any given IP address. New, Deleted and
-Transferred domains records can be queried up to 6 days in the past.
-"`
+    `"The IP Monitor API searches the daily activity of all our monitored TLDs on any given IP address. New, Deleted and
+    Transferred domains records can be queried up to 6 days in the past."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

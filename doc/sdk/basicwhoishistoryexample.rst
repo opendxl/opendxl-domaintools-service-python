@@ -110,9 +110,7 @@ to report on.
 
 From the DomainTools `Whois History Documentation <https://www.domaintools.com/resources/api-documentation/whois-history/>`_:
 
-`"
-The Whois History API provides a list of historic Whois records for a domain name.
-"`
+    `"The Whois History API provides a list of historic Whois records for a domain name."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

@@ -82,9 +82,7 @@ to report on.
 
 From the DomainTools `Reverse Name Server Documentation <https://www.domaintools.com/resources/api-documentation/reverse-name-server/>`_:
 
-`"
-The Reverse Name Server API provides a list of domain names that share the same primary or secondary name server.
-"`
+    `"The Reverse Name Server API provides a list of domain names that share the same primary or secondary name server."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

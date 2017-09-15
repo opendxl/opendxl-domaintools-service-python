@@ -93,10 +93,8 @@ to report on.
 
 From the DomainTools `Name Server Monitor Documentation <https://www.domaintools.com/resources/api-documentation/name-server-monitor/>`_:
 
-`"
-The Name Server Monitor API searches the daily activity of all our monitored TLDs on any given name server. New, Deleted
-and Transferred domains records can be queried up to 6 days in the past.
-"`
+    `"The Name Server Monitor API searches the daily activity of all our monitored TLDs on any given name server. New, Deleted
+    and Transferred domains records can be queried up to 6 days in the past."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

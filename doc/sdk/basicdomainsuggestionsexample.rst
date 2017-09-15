@@ -156,10 +156,8 @@ to report on.
 
 From the DomainTools `Domain Suggestions Documentation <https://www.domaintools.com/resources/api-documentation/domain-suggestions/>`_:
 
-`"
-The Domain Suggestions API provides a list of domain names that are similar to the words in a query string. It has a bias
-toward available domains and provides suggestions for .com, .net, .org, .info, .biz, and .us top level domain names.
-"`
+    `"The Domain Suggestions API provides a list of domain names that are similar to the words in a query string. It has a bias
+    toward available domains and provides suggestions for .com, .net, .org, .info, .biz, and .us top level domain names."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

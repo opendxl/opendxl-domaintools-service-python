@@ -75,11 +75,9 @@ to report on.
 
 From the DomainTools `Reverse IP Documentation <https://www.domaintools.com/resources/api-documentation/reverse-ip/>`_:
 
-`"
-The Reverse IP API provides a list of domain names that share the same Internet host (i.e. the same IP address).
-You can request an IP address directly, or you can provide a domain name; if you provide a domain name,
-the API will respond with the list of other domains that share the same IP
-"`
+    `"The Reverse IP API provides a list of domain names that share the same Internet host (i.e. the same IP address).
+    You can request an IP address directly, or you can provide a domain name; if you provide a domain name,
+    the API will respond with the list of other domains that share the same IP"`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.

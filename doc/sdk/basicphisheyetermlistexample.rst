@@ -82,10 +82,8 @@ This does not require any payload and returns list of terms that are set up for 
 
 From the DomainTools `PhishEye Term List Documentation <https://www.domaintools.com/resources/api-documentation/phisheye/>`_:
 
-`"
-This provides a list of terms that are set up for this account.
-The PhishEye API is only available via our Enterprise Solutions team, and is not included in a membership.
-"`
+    `"This provides a list of terms that are set up for this account.
+    The PhishEye API is only available via our Enterprise Solutions team, and is not included in a membership."`
 
 The final step is to perform a `synchronous request` via the DXL fabric. If the `response message` is not an error
 its contents are formatted and displayed.
