@@ -1,3 +1,5 @@
+import os
+
 from setuptools import setup
 import distutils.command.sdist
 
@@ -6,14 +8,17 @@ import setuptools.command.sdist
 # Patch setuptools' sdist behaviour with distutils' sdist behaviour
 setuptools.command.sdist.sdist.run = distutils.command.sdist.sdist.run
 
-VERSION = __import__('dxldomaintoolsservice').get_version()
+version_info = {}
+cwd=os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(cwd, "dxldomaintoolsservice", "_version.py")) as f:
+    exec(f.read(), version_info)
 
 dist = setup(
     # Package name:
     name="dxldomaintoolsservice",
 
     # Version number:
-    version=VERSION,
+    version=version_info["__version__"],
 
     # Requirements
     install_requires=[
@@ -23,13 +28,13 @@ dist = setup(
     ],
 
     # Package author details:
-    author="",
+    author="McAfee LLC",
 
     # License
-    license="",
+    license="Apache License 2.0",
 
     # Keywords
-    keywords=[],
+    keywords=['opendxl', 'dxl', 'mcafee', 'service', 'domaintools'],
 
     # Packages
     packages=[
@@ -37,13 +42,17 @@ dist = setup(
     ],
 
     # Details
-    url="",
+    url="http://www.mcafee.com/",
 
-    description="",
+    description="DomainTools API DXL Python service library",
 
     long_description=open('README').read(),
 
     classifiers=[
-        "Programming Language :: Python"
+        "Development Status :: 4 - Beta",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+        "License :: OSI Approved :: Apache Software License",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2.7",
     ],
 )

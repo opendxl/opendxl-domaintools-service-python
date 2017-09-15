@@ -1,5 +1,6 @@
 import logging
 
+from domaintools.exceptions import ServiceException
 from dxlclient.callbacks import RequestCallback
 from dxlclient.message import Response, ErrorResponse
 from dxlbootstrap.util import MessageUtils
@@ -31,37 +32,53 @@ class DomainToolsRequestCallback(RequestCallback):
         :param request: The request message
         """
         # Handle request
-        logger.info("Request received on topic: '{0}' with payload: '{1}'".format(
-            request.destination_topic, MessageUtils.decode_payload(request)))
+        logger.info("Request received on topic: '%s' with payload: '%s'",
+                    request.destination_topic,
+                    MessageUtils.decode_payload(request))
 
         try:
-            # Create response
             res = Response(request)
 
-            try:
-                request_dict = MessageUtils.json_payload_to_dict(request)
-            except Exception:
-                request_dict = {}
+            request_dict = MessageUtils.json_payload_to_dict(request) \
+                if request.payload else {}
 
             # Ensure required parameters are present
-            if request_dict and self._required_params:
+            if self._required_params:
                 for name in self._required_params:
                     if name not in request_dict:
-                        raise Exception("Required parameter not found: '{0}'".format(name))
+                        raise Exception("Required parameter not found: '{}'".
+                                        format(name))
+
+            if "format" not in request_dict:
+                request_dict["format"] = "json"
+            elif request_dict["format"] not in ("json", "xml"):
+                raise Exception("Unsupported format requested: '{}'. {}".format(
+                    request_dict["format"],
+                    "Only 'json' and 'xml' are supported."))
 
             # Invoke DomainTools API via client
-            dt_response = getattr(self._app.domaintools_api, self._func_name)(**request_dict)
+            dt_response = \
+                getattr(self._app.domaintools_api,
+                        self._func_name)(**request_dict)
 
             # Set response payload
-            MessageUtils.dict_to_json_payload(res, dt_response.data())
+            response_data = dt_response.data()
+            if isinstance(response_data, dict):
+                MessageUtils.dict_to_json_payload(res, response_data)
+            else:
+                MessageUtils.encode_payload(res, response_data)
 
-            # Send response
-            self._app.client.send_response(res)
+        except ServiceException as ex:
+            logger.exception("Error handling request")
+            msg = "%s: %s" % (ex.__class__.__name__, ex.reason)
+            res = ErrorResponse(request, MessageUtils.encode(msg))
 
         except Exception as ex:
             logger.exception("Error handling request")
             msg = str(ex)
-            if len(msg) == 0:
+            if not msg:
                 msg = ex.__class__.__name__
-            err_res = ErrorResponse(request, MessageUtils.encode(msg))
-            self._app.client.send_response(err_res)
+            res = ErrorResponse(request, MessageUtils.encode(msg))
+
+        # Send response
+        self._app.client.send_response(res)

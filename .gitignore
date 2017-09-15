@@ -1,0 +1,9 @@
+MANIFEST
+dist/
+sample/dxlclient.config
+config/dxlclient.config
+config/dxldomaintoolsservice.config
+config/logging.config
+*.pyc
+build/
+dxldomaintoolsservice.egg-info/

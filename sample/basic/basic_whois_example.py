@@ -1,10 +1,15 @@
+# This sample invokes and displays the results of a DomainTools "Whois Lookup"
+# via DXL.
+#
+# https://www.domaintools.com/resources/api-documentation/whois-lookup/
+
 import os
 import sys
 
-from dxlclient.client_config import DxlClientConfig
-from dxlclient.client import DxlClient
-from dxlclient.message import Message, Event, Request
 from dxlbootstrap.util import MessageUtils
+from dxlclient.client import DxlClient
+from dxlclient.client_config import DxlClientConfig
+from dxlclient.message import Message, Request
 
 # Import common logging and configuration
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/..")
@@ -30,7 +35,7 @@ with DxlClient(config) as client:
     res = client.sync_request(req, timeout=30)
     if res.message_type != Message.MESSAGE_TYPE_ERROR:
         res_dict = MessageUtils.json_payload_to_dict(res)
-        print MessageUtils.dict_to_json(res_dict, pretty_print=True)
+        print(MessageUtils.dict_to_json(res_dict, pretty_print=True))
     else:
-        print "Error invoking service with topic '{0}': {1} ({2})".format(
-            request_topic, res.error_message, res.error_code)
+        print("Error invoking service with topic '{}': {} ({})".format(
+            request_topic, res.error_message, res.error_code))
