@@ -1,6 +1,8 @@
 # Base image from Python 2.7 (alpine)
 FROM python:2.7-alpine
 
+VOLUME ["/opt/dxldomaintoolsservice-config"]
+
 # Install required packages
 RUN pip install "domaintools_api"
 RUN pip install "dxlbootstrap"
