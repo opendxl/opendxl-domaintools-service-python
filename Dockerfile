@@ -4,9 +4,7 @@ FROM python:2.7-slim
 VOLUME ["/opt/dxldomaintoolsservice-config"]
 
 # Install required packages
-RUN pip install "domaintools_api"
-RUN pip install "dxlbootstrap"
-RUN pip install "dxlclient"
+RUN pip install "domaintools_api" "dxlbootstrap>=0.1.3" "dxlclient"
 
 # Copy application files
 COPY . /tmp/build
