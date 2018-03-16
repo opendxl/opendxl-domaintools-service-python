@@ -4,6 +4,8 @@
 # See:
 # https://www.domaintools.com/resources/api-documentation/account-information/
 
+from __future__ import absolute_import
+from __future__ import print_function
 import os
 import sys
 
@@ -36,17 +38,17 @@ with DxlClient(config) as client:
     res = client.sync_request(req, timeout=30)
     if res.message_type != Message.MESSAGE_TYPE_ERROR:
         res_dict = MessageUtils.json_payload_to_dict(res)
-        print("Response in default (json) output format:\n{}".format(
-            MessageUtils.dict_to_json(res_dict, pretty_print=True)))
+        print(("Response in default (json) output format:\n{}".format(
+            MessageUtils.dict_to_json(res_dict, pretty_print=True))))
     else:
-        print("Error invoking service in json with topic '{}': {} ({})".format(
-            request_topic, res.error_message, res.error_code))
+        print(("Error invoking service in json with topic '{}': {} ({})".format(
+            request_topic, res.error_message, res.error_code)))
 
     MessageUtils.dict_to_json_payload(req, {"format": "xml"})
     res = client.sync_request(req, timeout=30)
     if res.message_type != Message.MESSAGE_TYPE_ERROR:
-        print("Response in xml output format:\n{}".format(
-            MessageUtils.decode_payload(res)))
+        print(("Response in xml output format:\n{}".format(
+            MessageUtils.decode_payload(res))))
     else:
-        print("Error invoking service in xml with topic '{}': {} ({})".format(
-            request_topic, res.error_message, res.error_code))
+        print(("Error invoking service in xml with topic '{}': {} ({})".format(
+            request_topic, res.error_message, res.error_code)))

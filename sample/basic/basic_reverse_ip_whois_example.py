@@ -3,6 +3,8 @@
 #
 # https://www.domaintools.com/resources/api-documentation/reverse-ip-whois/
 
+from __future__ import absolute_import
+from __future__ import print_function
 import os
 import sys
 
@@ -35,7 +37,7 @@ with DxlClient(config) as client:
     res = client.sync_request(req, timeout=30)
     if res.message_type != Message.MESSAGE_TYPE_ERROR:
         res_dict = MessageUtils.json_payload_to_dict(res)
-        print(MessageUtils.dict_to_json(res_dict, pretty_print=True))
+        print((MessageUtils.dict_to_json(res_dict, pretty_print=True)))
     else:
-        print("Error invoking service with topic '{}': {} ({})".format(
-            request_topic, res.error_message, res.error_code))
+        print(("Error invoking service with topic '{}': {} ({})".format(
+            request_topic, res.error_message, res.error_code)))
