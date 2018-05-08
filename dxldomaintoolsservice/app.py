@@ -1,10 +1,11 @@
+from __future__ import absolute_import
 from collections import OrderedDict
 import logging
 
+from domaintools import API
 from dxlbootstrap.app import Application
 from dxlclient.service import ServiceRegistrationInfo
 from dxldomaintoolsservice.requesthandlers import DomainToolsRequestCallback
-from domaintools import API
 
 
 # Configure local logger
