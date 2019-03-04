@@ -1,0 +1,1195 @@
+openDxlApi: '0.1'
+info:
+  title: 'DomainTools DXL Service'
+  version: 0.1.0
+  description: 'The DomainTools DXL service exposes access to the <a href=''https://www.domaintools.com/resources/api-documentation/''>DomainTools API</a> via the <a href=''http://www.mcafee.com/us/solutions/data-exchange-layer.aspx''>Data Exchange Layer</a> (DXL) fabric.'
+  contact:
+    name: OpenDXL
+    url: 'https://www.opendxl.com'
+solutions:
+  'DomainTools DXL Service':
+    info:
+      title: 'DomainTools DXL Service'
+      version: 0.2.0
+      description: 'The DomainTools DXL Service.'
+    externalDocs:
+      description: 'DomainTools API Documentation'
+      url: 'https://www.domaintools.com/resources/api-documentation/'
+    services:
+      -
+        $ref: '#/services/DomainTools DXL Python Service'
+    events: []
+services:
+  'DomainTools DXL Python Service':
+    info:
+      title: 'DomainTools DXL Python Service'
+      version: 0.2.0
+      description: 'The DomainTools DXL service exposes access to the <a href=''https://www.domaintools.com/resources/api-documentation/''>DomainTools API</a> via the <a href=''http://www.mcafee.com/us/solutions/data-exchange-layer.aspx''>Data Exchange Layer</a> (DXL) fabric.'
+    externalDocs:
+      description: 'DomainTools DXL Python Service (GitHub)'
+      url: 'https://github.com/opendxl/opendxl-domaintools-service-python'
+    requests:
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1account_information'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1brand_monitor'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1domain_profile'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1domain_search'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1domain_suggestions'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1host_domains'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1hosting_history'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1ip_monitor'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1ip_registrant_monitor'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1iris'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1name_server_monitor'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1parsed_whois'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1phisheye'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1phisheye_term_list'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1registrant_monitor'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1reputation'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1reverse_ip'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1reverse_ip_whois'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1reverse_name_server'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1reverse_whois'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1whois'
+      -
+        $ref: '#/requests/~1opendxl-domaintools~1service~1domaintools~1whois_history'
+requests:
+  /opendxl-domaintools/service/domaintools/account_information:
+    description: 'Provides a quick and easy way to get a snapshot of API product usage for an account.'
+    externalDocs:
+      description: 'DomainTools API Documentation: Account Information'
+      url: 'https://www.domaintools.com/resources/api-documentation/account-information/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          example:
+            format: json
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/account-information/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            account:
+              active: true
+              api_username: username
+            products:
+              -
+                absolute_limit: null
+                expiration_date: null
+                id: account-information
+                per_minute_limit: '5'
+                per_month_limit: '100000'
+                usage:
+                  month: '0'
+                  today: '0'
+              -
+                absolute_limit: '10000'
+                expiration_date: '2017-07-18'
+                id: domain-profile
+                per_minute_limit: '120'
+                per_month_limit: null
+                usage:
+                  month: '0'
+                  today: '0'
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/brand_monitor:
+    description: 'Searches across all new domain registrations worldwide, and return result sets consisting of domain names that contain a customer''s brand or monitored word/string.'
+    externalDocs:
+      description: 'DomainTools API Documentation: Brand Monitor'
+      url: 'https://www.domaintools.com/resources/api-documentation/brand-monitor/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Query Property'
+        -
+          description: 'For a list of attributes that can be used with this command, see: <a href=''https://www.domaintools.com/resources/api-documentation/brand-monitor/''>DomainTools API</a>.'
+        -
+          example:
+            query: domaintools
+    required:
+      - query
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/brand-monitor/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            alerts: []
+            date: '2017-07-17'
+            exclude: []
+            limit: 3000
+            new: true
+            on-hold: true
+            query: domaintools
+            total: 0
+            utf8: false
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/domain_profile:
+    description: 'Provides basic domain name registration details and a preview of additional data available from DomainTools membership and report products.'
+    externalDocs:
+      description: 'DomainTools API Documentation: Domain Profile'
+      url: 'https://www.domaintools.com/resources/api-documentation/domain-profile/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Query Property'
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          example:
+            query: domaintools
+            format: json
+    required:
+      - query
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/domain-profile/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            history:
+              ip_address:
+                events: 91
+                product_url: 'https://research.domaintools.com/research/hosting-history/?q=domaintools.com'
+                timespan_in_years: 11
+              name_server:
+                events: 6
+                product_url: 'https://research.domaintools.com/research/hosting-history/?q=domaintools.com'
+                timespan_in_years: 9
+              registrar:
+                earliest_event: '2002-04-12'
+                events: 4
+                product_url: 'https://research.domaintools.com/research/hosting-history/?q=domaintools.com'
+              whois:
+                earliest_event: '2001-10-26'
+                product_url: 'https://research.domaintools.com/research/whois-history/search/?q=domaintools.com'
+                records: 4197
+            name_servers:
+              -
+                product_url: 'https://reversens.domaintools.com/search/?q=NS1.P09.DYNECT.NET'
+                server: NS1.P09.DYNECT.NET
+              -
+                product_url: 'https://reversens.domaintools.com/search/?q=NS2.P09.DYNECT.NET'
+                server: NS2.P09.DYNECT.NET
+            registrant:
+              domains: 271
+              name: 'DOMAINTOOLS, LLC'
+              product_url: 'https://reversewhois.domaintools.com/?all[]=DOMAINTOOLS%2C+LLC&none[]='
+            registration:
+              created: '1998-08-02'
+              expires: '2018-08-01'
+              registrar: 'ENOM, INC.'
+              statuses:
+                - clientTransferProhibited
+              updated: '2017-07-03'
+            seo:
+              product_url: 'https://research.domaintools.com/seo-browser/?domain=domaintools.com'
+              score: 75
+            server:
+              ip_address: 199.30.228.112
+              other_domains: 3
+              product_url: 'https://reverseip.domaintools.com/search/?q=domaintools.com'
+            website_data:
+              meta: []
+              product_url: 'https://whois.domaintools.com/domaintools.com'
+              response_code: 200
+              server: 'Here and There'
+              title: 'Home | DomainTools'
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/domain_search:
+    description: 'Searches for domain names that match the specific request query string.'
+    externalDocs:
+      description: 'DomainTools API Documentation: Domain Search'
+      url: 'https://www.domaintools.com/resources/api-documentation/domain-search/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Query Property'
+        -
+          description: 'For a list of attributes that can be used with this command, see: <a href=''https://www.domaintools.com/resources/api-documentation/domain-search/''>DomainTools API</a>.'
+        -
+          example:
+            query: 'domain tools'
+    required:
+      - query
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/domain-search/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            query_info:
+              active_only: false
+              anchor_left: false
+              anchor_right: false
+              deleted_only: false
+              exclude_query: ""
+              has_hyphen: true
+              has_number: true
+              limit: 100
+              max_length: 25
+              min_length: 1
+              page: 1
+              total_results: 510
+            results:
+              -
+                char_count: 11
+                has_active: 1
+                has_deleted: 1
+                has_hyphen: 0
+                has_number: 0
+                hashad_tlds:
+                  - asia
+                  - at
+                  - be
+                  - biz
+                  - bz
+                  - ca
+                  - xyz
+                sld: domaintools
+                tlds:
+                  - asia
+                  - at
+                  - be
+                  - biz
+                  - bz
+                  - ca
+                  - xyz
+                tlds_count: 84
+              -
+                char_count: 19
+                has_active: 1
+                has_deleted: 1
+                has_hyphen: 0
+                has_number: 0
+                hashad_tlds:
+                  - com
+                sld: domainbusinesstools
+                tlds:
+                  - com
+                tlds_count: 1
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/domain_suggestions:
+    description: 'Provides a list of domain names that are similar to the words in a request query string.'
+    externalDocs:
+      description: 'DomainTools API Documentation: Domain Suggestions'
+      url: 'https://www.domaintools.com/resources/api-documentation/domain-suggestions/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Query Property'
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          example:
+            query: 'domain tools'
+    required:
+      - query
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/domain-suggestions/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            query: 'domain tools'
+            status_codes:
+              d: 'deleted and available again'
+              e: 'on-hold (pending delete)'
+              g: 'on-hold (redemption period)'
+              h: 'on-hold (generic)'
+              p: 'registered and parked or redirected'
+              q: 'never registered before'
+              w: 'registered and active website'
+              x: 'registered and no website'
+            suggestions:
+              -
+                domain: domainfreetools
+                status: qqqqqq
+              -
+                domain: domainusatools
+                status: qqqqqq
+              -
+                domain: domainbuytools
+                status: qqqqqq
+              -
+                domain: domainnetworktools
+                status: qqqqqq
+            tlds:
+              - COM
+              - NET
+              - ORG
+              - INFO
+              - BIZ
+              - US
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/host_domains:
+    description: 'Provides a list of domain names that share the same Internet host (i.e. the same IP address). Also see ''Reverse IP'' request.'
+    externalDocs:
+      description: 'DomainTools API Documentation: Reverse IP (and Host Domains)'
+      url: 'https://www.domaintools.com/resources/api-documentation/reverse-ip/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/IP Property'
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          description: 'For a list of attributes that can be used with this command, see: <a href=''https://www.domaintools.com/resources/api-documentation/reverse-ip/''>DomainTools API</a>.'
+        -
+          example:
+            ip: 64.246.165.240
+            format: json
+    required:
+      - ip
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/reverse-ip/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            ip_addresses:
+              domain_count: 1
+              domain_names:
+                - DAILYCHANGES.COM
+              ip_address: 64.246.165.240
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/hosting_history:
+    description: 'Provides basic domain name registration details and a preview of additional data available from DomainTools membership and report products.'
+    externalDocs:
+      description: 'DomainTools API Documentation: Hosting History'
+      url: 'https://www.domaintools.com/resources/api-documentation/hosting-history/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Query Property'
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          example:
+            query: domaintools.com
+            format: json
+    required:
+      - query
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/hosting-history/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            domain_name: domaintools.com
+            ip_history:
+              -
+                action: N
+                action_in_words: New
+                actiondate: '2004-05-03'
+                domain: DOMAINTOOLS.COM
+                post_ip: 63.247.77.156
+                pre_ip: null
+              -
+                action: C
+                action_in_words: Change
+                actiondate: '2009-10-24'
+                domain: DOMAINTOOLS.COM
+                post_ip: 204.2.145.27
+                pre_ip: 209.107.205.90
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/ip_monitor:
+    description: 'Searches the daily activity of all our monitored TLDs on any given IP address.'
+    externalDocs:
+      description: 'DomainTools API Documentation: IP Monitor'
+      url: 'https://www.domaintools.com/resources/api-documentation/ip-monitor/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Query Property'
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          description: 'For a list of attributes that can be used with this command, see: <a href=''https://www.domaintools.com/resources/api-documentation/ip-monitor/''>DomainTools API</a>.'
+        -
+          example:
+            query: 65.55.53.233
+            format: json
+    required:
+      - query
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/ip-monitor/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            alerts: []
+            date: '2017-07-18'
+            ip_address: 65.55.53.233
+            limit: 1000
+            page: 1
+            page_count: 0
+            total: '0'
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/ip_registrant_monitor:
+    description: 'Searches the ownership (Whois) records of IP address allocations for specific search terms.'
+    externalDocs:
+      description: 'DomainTools API Documentation: IP Registrant Monitor'
+      url: 'https://www.domaintools.com/resources/api-documentation/ip-registrant-monitor/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Query Property'
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          description: 'For a list of attributes that can be used with this command, see: <a href=''https://www.domaintools.com/resources/api-documentation/ip-registrant-monitor/''>DomainTools API</a>.'
+        -
+          example:
+            query: domaintools
+            format: json
+    required:
+      - query
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/ip-registrant-monitor/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            record_count: 99
+            modified: []
+            page: 1
+            added:
+              -
+                ip_to: 51.255.100.255
+                organization: 'INTERNAL USAGE'
+                record_ip: 51.255.100.255
+                record_date: '2016-01-05'
+                range: 51.255.100.224/27
+                ip_from: 51.255.100.224
+                server: whois.ripe.net
+                country: FR
+              -
+                ip_to: 51.254.170.239
+                organization: 'PrivateCloud id -831'
+                record_ip: 51.254.170.224
+                record_date: '2016-01-05'
+                range: 51.254.170.224/28
+                ip_from: 51.254.170.224
+                server: whois.ripe.net
+                country: FR
+            removed:
+              -
+                ip_to: 46.105.155.183
+                record_ip: 46.105.155.177
+                record_date: '2015-03-09'
+                range: 46.105.155.176/29
+                ip_from: 46.105.155.176
+                organization: usertestro
+                server: whois.ripe.net
+                country: FR
+              -
+                ip_to: 37.59.91.175
+                record_ip: 37.59.91.163
+                record_date: '2015-02-13'
+                range: 37.59.91.160/28
+                ip_from: 37.59.91.160
+                organization: 'SP&PS'
+                server: whois.ripe.net
+                country: FR
+            has_more_pages: false
+            date: '2016-01-06'
+            query: ovh
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/iris:
+    description: 'Provides a quick and easy way to get a snapshot of API product usage for an account.'
+    externalDocs:
+      description: 'DomainTools API Documentation: Iris Pivot'
+      url: 'https://www.domaintools.com/resources/api-documentation/iris-pivot'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          description: 'For a list of attributes that can be used with this command, see: <a href=''https://www.domaintools.com/resources/api-documentation/iris-pivot''>DomainTools API</a>. <p><b>Note:</b> At least one field must be chosen from the Iris API parameters (Ex: <i>domain</i>, <i>ip</i>, <i>email</i>, <i>registrar</i>, etc.).'
+        -
+          example:
+            domain: domaintools.com
+            format: json
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/iris-pivot''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            limit_exceeded: false
+            message: 'Enjoy your data.'
+            results_count: 1
+            results:
+              -
+                domain: domaintools.com
+                whois_url: 'https://whois.domaintools.helium/domaintools.com'
+                adsense: ""
+                alexa: 2346
+                google_analytics: 76641
+                admin_contact:
+                  name: 'DOMAIN ADMINISTRATOR'
+                  org: 'DOMAINTOOLS, LLC'
+                  street: '2101 4TH AVE,SUITE 1150'
+                  city: SEATTLE
+                  state: WA
+                  postal: '98121'
+                  country: us
+                  phone: '12068389035'
+                  fax: '12068389056'
+                  email:
+                    - memberservices@domaintools.com
+                billing_contact:
+                  name: ""
+                  org: ""
+                  street: ""
+                  city: ""
+                  state: ""
+                  postal: ""
+                  country: ""
+                  phone: ""
+                  fax: ""
+                  email: []
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/name_server_monitor:
+    description: 'Searches the daily activity of all our monitored TLDs on any given name server.'
+    externalDocs:
+      description: 'DomainTools API Documentation: Name Server Monitor'
+      url: 'https://www.domaintools.com/resources/api-documentation/name-server-monitor/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Query Property'
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          description: 'For a list of attributes that can be used with this command, see: <a href=''https://www.domaintools.com/resources/api-documentation/name-server-monitor/''>DomainTools API</a>.'
+        -
+          example:
+            query: DNSPOD.NET
+            format: json
+    required:
+      - query
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/name-server-monitor/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            alerts:
+              -
+                action: 'Transfer Out'
+                domain: 00000000000.PW
+                new_name_server: i-now.cn
+                old_name_server: dnspod.net
+              -
+                action: New
+                domain: 1524PPP.COM
+                new_name_server: dnspod.net
+                old_name_server: ""
+            date: '2017-07-18'
+            limit: 1000
+            name_server: DNSPOD.NET
+            page: 1
+            page_count: 35
+            total: '34494'
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/parsed_whois:
+    description: 'Searches the daily activity of all our monitored TLDs on any given name server.'
+    externalDocs:
+      description: 'DomainTools API Documentation: Parsed Whois'
+      url: 'https://www.domaintools.com/resources/api-documentation/parsed-whois/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Query Property'
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          example:
+            query: domaintools.com
+            format: json
+    required:
+      - query
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/parsed-whois/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            name_servers:
+              - NS1.P09.DYNECT.NET
+              - NS2.P09.DYNECT.NET
+              - NS3.P09.DYNECT.NET
+              - NS4.P09.DYNECT.NET
+            parsed_whois:
+              contacts:
+                admin:
+                  city: SEATTLE
+                  country: US
+                  email: MEMBERSERVICES@DOMAINTOOLS.COM
+                  fax: '12068389056'
+                  name: 'DOMAIN ADMINISTRATOR'
+                  org: 'DOMAINTOOLS, LLC'
+                  phone: '12068389035'
+                  postal: '98121'
+                  state: WA
+                  street:
+                    - '2101 4TH AVE'
+                    - 'SUITE 1150'
+                billing:
+                  city: ""
+                  country: ""
+                  email: ""
+                  fax: ""
+                  name: ""
+                  org: ""
+                  phone: ""
+                  postal: ""
+                  state: ""
+                  street: []
+                registrant:
+                  city: SEATTLE
+                  country: US
+                  email: MEMBERSERVICES@DOMAINTOOLS.COM
+                  fax: '12068389056'
+                  name: 'DOMAIN ADMINISTRATOR'
+                  org: 'DOMAINTOOLS, LLC'
+                  phone: '12068389035'
+                  postal: '98121'
+                  state: WA
+                  street:
+                    - '2101 4TH AVE'
+                    - 'SUITE 1150'
+                tech:
+                  city: SEATTLE
+                  country: US
+                  email: MEMBERSERVICES@DOMAINTOOLS.COM
+                  fax: '12068389056'
+                  name: 'DOMAIN ADMINISTRATOR'
+                  org: 'DOMAINTOOLS, LLC'
+                  phone: '12068389035'
+                  postal: '98121'
+                  state: WA
+                  street:
+                    - '2101 4TH AVE'
+                    - 'SUITE 1150'
+              created_date: '1998-08-02T04:00:00+00:00'
+              domain: domaintools.com
+              expired_date: '2018-08-01T04:00:00+00:00'
+              name_servers:
+                - ns1.p09.dynect.net
+                - ns2.p09.dynect.net
+                - ns3.p09.dynect.net
+                - ns4.p09.dynect.net
+              other_properties:
+                dnssec: unSigned
+                registry_domain_id: 1697312_DOMAIN_COM-VRSN
+              registrar:
+                abuse_contact_email: abuse@enom.com
+                abuse_contact_phone: '14252982646'
+                iana_id: '48'
+                name: 'ENOM, INC.'
+                url: www.enom.com
+                whois_server: whois.enom.com
+              statuses:
+                - 'clientTransferProhibited https://www.icann.org/epp#clientTransferProhibited'
+              updated_date: '2017-07-03T00:43:03+00:00'
+            record_source: domaintools.com
+            registrant: 'DOMAINTOOLS, LLC'
+            registration:
+              created: '1998-08-02'
+              expires: '2018-08-01'
+              registrar: 'ENOM, INC.'
+              statuses:
+                - clientTransferProhibited
+              updated: '2017-07-03'
+            whois:
+              date: '2017-07-17'
+              record: 'Domain Name: DOMAINTOOLS.COM <etc.>...'
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/phisheye:
+    description: 'PhishEye Domain List returns domain results for monitored terms. Also see ''PhishEye Term List'' below.'
+    externalDocs:
+      description: 'DomainTools API Documentation: PhishEye'
+      url: 'https://www.domaintools.com/resources/api-documentation/phisheye/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Query Property'
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          description: 'For a list of attributes that can be used with this command, see: <a href=''https://www.domaintools.com/resources/api-documentation/phisheye/''>DomainTools API</a>.'
+        -
+          example:
+            query: apple
+            format: json
+    required:
+      - query
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/phisheye/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            term: apple
+            date: '2016-11-01'
+            domains:
+              -
+                domain: firstexample-apple.com
+                tld: com
+                created_date: '2016-10-30'
+                registrant_email: somebody@example.com
+                name_servers:
+                  - ns1.example.com
+                  - ns2.example.com
+                registrar_name: 'Some Registrar 1'
+                risk_score: 88
+              -
+                domain: appeltypoexample.com
+                tld: com
+                created_date: '2016-10-31'
+                registrant_email: somebody2@example.com
+                ip_addresses:
+                  -
+                    ip: 192.0.2.100
+                    country_code: US
+                  -
+                    ip: 192.0.2.101
+                    country_code: US
+                name_servers:
+                  - ns57.domaincontrol.com
+                  - ns58.domaincontrol.com
+                registrar_name: 'GoDaddy.com, LLC'
+                risk_score: 24
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/phisheye_term_list:
+    description: 'Provides a list of terms that are set up for this account.'
+    externalDocs:
+      description: 'DomainTools API Documentation: PhishEye'
+      url: 'https://www.domaintools.com/resources/api-documentation/phisheye/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          description: 'For a list of attributes that can be used with this command, see: <a href=''https://www.domaintools.com/resources/api-documentation/phisheye/''>DomainTools API</a>.'
+        -
+          example:
+            format: json
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/phisheye/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            terms:
+              -
+                term: apple
+                active: true
+                user_monitor_count: 2
+              -
+                term: chevrolet
+                active: true
+                user_monitor_count: 1
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/registrant_monitor:
+    description: 'Searches the ownership (Whois) records of domain names for specific search terms.'
+    externalDocs:
+      description: 'DomainTools API Documentation: Registrant Monitor'
+      url: 'https://www.domaintools.com/resources/api-documentation/registrant-monitor/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Query Property'
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          description: 'For a list of attributes that can be used with this command, see: <a href=''https://www.domaintools.com/resources/api-documentation/registrant-monitor/''>DomainTools API</a>.'
+        -
+          example:
+            query: domaintools
+            format: json
+    required:
+      - query
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/registrant-monitor/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            alerts: []
+            date: '2017-07-18'
+            limit: 3000
+            query: domaintools
+            total: 0
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/reputation:
+    description: 'The Reputation API is only available via Enterprise Solutions team, and is not included in a membership. See DomainTools Documentation for more details.'
+    externalDocs:
+      description: 'DomainTools API Documentation: Domain Reputation'
+      url: 'https://www.domaintools.com/resources/api-documentation/reputation/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Query Property'
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          description: 'For a list of attributes that can be used with this command, see: <a href=''https://www.domaintools.com/resources/api-documentation/reputation/''>DomainTools API</a>.'
+        -
+          example:
+            query: domaintools.com
+            format: json
+    required:
+      - query
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/reputation/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            domain: domaintools.com
+            risk_score: 0
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/reverse_ip:
+    description: 'Provides a list of domain names that share the same Internet host (i.e. the same IP address).'
+    externalDocs:
+      description: 'DomainTools API Documentation: Reverse IP'
+      url: 'https://www.domaintools.com/resources/api-documentation/reverse-ip/'
+    payload:
+      allOf:
+        -
+          properties:
+            domain:
+              description: '(<b>Required</b>) The domain name.'
+              type: string
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          description: 'For a list of attributes that can be used with this command, see: <a href=''https://www.domaintools.com/resources/api-documentation/reverse-ip/''>DomainTools API</a>.'
+        -
+          example:
+            query: domaintools.com
+            format: json
+    required:
+      - domain
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/reverse-ip/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            ip_addresses:
+              domain_count: 3
+              domain_names:
+                - DOMAINTOOLS.COM
+                - WHOISAPI.COM
+                - WHOISSUGGEST.COM
+              ip_address: 199.30.228.112
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/reverse_ip_whois:
+    description: 'Provides a list of IP ranges that are owned by an Organization.'
+    externalDocs:
+      description: 'DomainTools API Documentation: Reverse IP Whois'
+      url: 'https://www.domaintools.com/resources/api-documentation/reverse-ip-whois/'
+    payload:
+      allOf:
+        -
+          properties:
+            query:
+              description: 'One or more terms separated by the pipe character ( ''|'' ). (<b>Required</b> for a range of results. Not usable if <i>ip</i> is specified)'
+              type: string
+            ip:
+              description: 'A single full IP Address ( i.e. 65.55.53.233 ). (<b>Required</b> for a single IP result. Not usable if <i>query</i> is specified)'
+              type: string
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          description: 'For a list of attributes that can be used with this command, see: <a href=''https://www.domaintools.com/resources/api-documentation/reverse-ip-whois/''>DomainTools API</a>.'
+        -
+          example:
+            query: google
+            format: json
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/reverse-ip-whois/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            has_more_pages: true
+            page: 1
+            total_count: 1105
+            record_count: 1000
+            records:
+              -
+                ip_from: 1.179.248.0
+                ip_to: 1.179.255.255
+                record_ip: 1.179.249.17
+                record_date: '2015-05-15'
+                server: whois.apnic.net
+                organization: 'Static IP address for Google-caching servers'
+                country: TH
+                range: 1.179.248.0/21
+              -
+                ip_from: 4.3.2.0
+                ip_to: 4.3.2.255
+                record_ip: 4.3.2.1
+                record_date: '2015-05-17'
+                server: whois.arin.net
+                organization: 'Google Inc.'
+                country: US
+                range: 4.3.2.0/24
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/reverse_name_server:
+    description: 'Provides a list of domain names that share the same primary or secondary name server.'
+    externalDocs:
+      description: 'DomainTools API Documentation: Reverse Name Server'
+      url: 'https://www.domaintools.com/resources/api-documentation/reverse-name-server/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Query Property'
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          description: 'For a list of attributes that can be used with this command, see: <a href=''https://www.domaintools.com/resources/api-documentation/reverse-name-server/''>DomainTools API</a>.'
+        -
+          example:
+            query: domaintools.net
+            format: json
+    required:
+      - query
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/reverse-name-server/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            name_server:
+              hostname: domaintools.net
+              primary: 159
+              secondary: 0
+              total: 159
+            primary_domains:
+              - aveneparis.com
+              - aveneskin.com
+              - aveneskinshop.com
+              - avenetherapy.com
+              - blank-nameserver.com
+              - bulk-check.com
+            secondary_domains: []
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/reverse_whois:
+    description: 'Provides a list of domain names that share the same Registrant Information.'
+    externalDocs:
+      description: 'DomainTools API Documentation: Reverse Whois'
+      url: 'https://www.domaintools.com/resources/api-documentation/reverse-whois/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Query Property'
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          description: 'For a list of attributes that can be used with this command, see: <a href=''https://www.domaintools.com/resources/api-documentation/reverse-whois/''>DomainTools API</a>.'
+        -
+          example:
+            query: 'DomainTools LLC'
+            format: json
+    required:
+      - query
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/reverse-whois/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            domain_count:
+              current: 338
+              historic: 463
+            report_price:
+              current: 299
+              historic: 299
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/whois:
+    description: 'Provides the ownership record for a domain name or IP address with basic registration details.'
+    externalDocs:
+      description: 'DomainTools API Documentation: Whois Lookup'
+      url: 'https://www.domaintools.com/resources/api-documentation/whois-lookup/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Query Property'
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          example:
+            query: domaintools.com
+            format: json
+    required:
+      - query
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/whois-lookup/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            name_servers:
+              - NS1.P09.DYNECT.NET
+              - NS2.P09.DYNECT.NET
+              - NS3.P09.DYNECT.NET
+              - NS4.P09.DYNECT.NET
+            record_source: domaintools.com
+            registrant: 'DOMAINTOOLS, LLC'
+            registration:
+              created: '1998-08-02'
+              expires: '2018-08-01'
+              registrar: 'ENOM, INC.'
+              statuses:
+                - clientTransferProhibited
+              updated: '2017-07-03'
+            whois:
+              date: '2017-07-17'
+              record: 'Domain Name: DOMAINTOOLS.COM <etc.>...'
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+  /opendxl-domaintools/service/domaintools/whois_history:
+    description: 'Provides a list of historic Whois records for a domain name.'
+    externalDocs:
+      description: 'DomainTools API Documentation: Whois History'
+      url: 'https://www.domaintools.com/resources/api-documentation/whois-history/'
+    payload:
+      allOf:
+        -
+          $ref: '#/definitions/Query Property'
+        -
+          $ref: '#/definitions/Format Property'
+        -
+          example:
+            query: domaintools.com
+            format: json
+    required:
+      - query
+    response:
+      description: 'The contents of the DXL response payload matches the response provided by the DomainTools API. Please see the <a href=''https://www.domaintools.com/resources/api-documentation/whois-history/''>DomainTools API Documentation</a> for further details.'
+      payload:
+        example:
+          response:
+            history:
+              -
+                date: '2001-10-26'
+                is_private: 0
+                whois:
+                  name_servers:
+                    - DNS1.INTERLAND.NET
+                  record: 'Registrant: VRW2 <etc.>...'
+                  registrant: VRW2
+                  registration:
+                    created: '1998-08-02'
+                    expires: '2002-08-02'
+                    registrar: 'NETWORK SOLUTIONS, INC.'
+                    statuses:
+                      - ACTIVE
+              -
+                date: '2003-08-25'
+                is_private: 0
+                whois:
+                  name_servers:
+                    - NS1.XXXNAMESERVERS.COM
+                  record: 'Registrant: DomainTools.com <etc.>...'
+                  registrant: DomainTools.com
+                  registration:
+                    created: '1998-08-02'
+                    expires: '2004-08-01'
+                    registrar: 'TUCOWS, INC.'
+                    statuses:
+                      - ACTIVE
+            record_count: 46
+    errorResponses:
+      '0':
+        payload:
+          $ref: '#/definitions/Error Response Object'
+definitions:
+  'Error Response Object':
+    example: 'Error handling request: Service Unavailable'
+  'Query Property':
+    properties:
+      format:
+        description: '(<b>Required</b>) One or more terms separated by the pipe character ( ''|'' ).'
+        type: string
+  'IP Property':
+    properties:
+      ip:
+        description: '(<b>Required</b>) A single full IP Address ( i.e. 65.55.53.233 ).'
+        type: string
+  'Format Property':
+    properties:
+      format:
+        description: 'Output format for response. Supported values are ''json'' and ''xml''. Defaults to ''json''.'
+        type: string
