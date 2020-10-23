@@ -66,7 +66,7 @@ setup(
 
     # Requirements
     install_requires=[
-        "domaintools_api",
+        "domaintools_api==0.3.3",
         "dxlbootstrap>=0.2.0",
         "dxlclient>=4.1.0.184"
     ],
