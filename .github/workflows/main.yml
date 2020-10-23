@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - master
+      - buildissues
   pull_request:
   schedule:
     - cron:  '0 0 * * *'
